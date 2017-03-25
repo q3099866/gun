@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>zuolun</title>
+	<style type="text/css">
+		.gun{
+			margin:200px 900px ;
+			position: relative;
+		}
+		.danjia{width: 98px;
+			height: 83px;
+			background-image: url(ro.png);
+			background-position:0px 0px ;
+			position: absolute;
+			top: 26px;
+			left: 134px;
+		}
+		.danjia:hover{
+			background-position:-98px 0px ;
+		}
+		.pin{
+			position: absolute;
+			top: -3px;
+			left: 273px;
+		}
+		.tig{
+			position: absolute;
+			top: 132px;
+			left: 183px;
+		}
+		.pin img{
+			transform:rotate(0deg);
+			transition:all .5s ease 0s;
+		}
+		/*.pin:hover img{
+			transform:rotate(60deg);
+		}*/
+
+		.tig img{
+			transform:rotate(0deg);
+			transition:all .5s ease 0s;
+		}
+		.spi img{
+			transform:rotate(0deg);
+			transition:all 3s ease 0s;
+		}
+		/*.spi:hover img{
+			transform:rotate(1441deg);
+		}*/
+		.shikou1 ul img{
+			width: 180px;
+			height: 200px;
+		}
+		.shikou1 {
+			position: absolute;
+			right:500px;
+			top: 10px;
+			width: 180px;
+			height: 200px;
+			overflow: hidden;
+		}
+		.shikou1 ul{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		left:0px;
+		top:0px;		
+		}
+		.shikou11{
+			position: absolute;
+			right:260px;
+			top: 75px;
+			width: 220px;
+			height: 60px;
+			overflow: hidden;
+		}
+		.shikou11 ol img{
+			width: 200px;
+			height: 60px;
+		}
+		.shikou11 ol{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		left:0px;
+		bottom:0px;		
+		}
+		.zidanzuo{
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			display: none;
+		}
+		.blood{
+			position: absolute;
+			top: 100px;
+			right:360px;
+			display: none;
+		}
+		.kaishi{
+			display: none;
+		}
+		.zkaishi{
+			position: relative;
+			color: rgba(255,255,255,1);
+			text-decoration: none;
+			background-color: rgba(219,87,5,1);
+			font-family: 'Yanone Kaffeesatz';
+			font-weight: 700;
+			font-size: 3em;
+			display: block;
+			padding: 4px;
+			-webkit-border-radius: 8px;
+			-moz-border-radius: 8px;
+			border-radius: 8px;
+			-webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+			-moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+			box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+			margin: 100px auto;
+			width: 160px;
+			text-align: center;
+			
+			-webkit-transition: all .1s ease;
+			-moz-transition: all .1s ease;
+			-ms-transition: all .1s ease;
+			-o-transition: all .1s ease;
+			transition: all .1s ease;
+		}
+		.zkaishi:active {
+			-webkit-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+			-moz-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+			box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+			position: relative;
+			top: 6px;
+		}
+
+	</style>
+	<script src="jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var dan=0;//开始单击次数
+			var dan1=0;//再定义一个开始单击次数
+			var clickd=0;//单击总开始次数
+			var degrees   = [0, 56, 107, 160, 210, 258, 308];//圆盘度数
+			var degrees   = [0, 60, 120, 180, 240, 300, 360];//圆盘度数
+			var danindex;//变全局
+			var danindex;
+			var dushu;//获取大开始后的度数；
+			var top1=0;//定义top值
+			$('.zkaishi').click(function(){
+				clickd++;//总开始单击++
+				var audioElezuo = $("#audiozuo1")[0];//创建audio
+				audioElezuo.load();//防止双点 要先清除播放 不清除会继续半路播放
+				audioElezuo.play();
+				var danindex = Math.floor(Math.random()*6);//随机获取1~6数字；
+				$('.spi img')[0].style.transform= 'rotate('+(5*360*clickd+degrees[danindex])+'deg)';//弹夹旋转变型
+				$('.spi img')[0].style.transition= "all 3s ease 0s";
+				//console.log(5*360*clickd+degrees[danindex]);
+				dushu=5*360*clickd+degrees[danindex];//获取转了多少度
+				$('.blood')[0].style.display="none";
+			  timerzuo=	setInterval(function(){
+					$('.kaishi').click();
+				},3000);//每3秒点击一下开始
+				//console.log(dushu);
+			});
+			$('.kaishi').click(function(){
+			//console.log(danindex);
+			var audioElezuo = $("#audiozuo2")[0];//创建audio
+				audioElezuo.load();//防止双点 要先清除播放 不清除会继续半路播放
+				audioElezuo.play();
+				dan+=98;
+				dan1+=60;
+				//console.log(dushu%60);
+				var dan2=dushu%360;
+				//console.log(dan2);
+				var dan3=dan2+dan1;
+				console.log(dan3);
+				top1++;
+				//console.log(top1);
+				
+				if(top1<6){
+					$('.shikou1 ul').stop(true).animate({top:'-'+top1*203},3000);
+					$('.shikou11 ol').stop(true).animate({bottom:'-'+top1*63},3000);
+				}
+				else {
+					$('.shikou1 ul').stop(true).animate({top:'-'+top1*0},3000);
+					$('.shikou11 ol').stop(true).animate({bottom:'-'+top1*0},3000);
+					top1=0;
+				}
+			$('.spi img')[0].style.transform= 'rotate('+dan3+'deg)';	
+			$('.spi img')[0].style.transition= "all 0s ease 0s";	
+			//$('.spi img')[0].style.transform= "rotate(60deg)";	
+			//console.log(dushu);
+			if(dan3%360==0){//判断是否开枪
+				$('.zidanzuo').stop(true).animate({right:500}, 3500)//子弹
+				$('.zidanzuo')[0].style.display="block";
+				clearInterval(timerzuo);
+				var audioElezuo = $("#audiozuo3")[0];//创建audio
+				audioElezuo.load();//防止双点 要先清除播放 不清除会继续半路播放
+				audioElezuo.play();
+				setTimeout(function(){		
+					$('.blood')[0].style.display="block";
+				},2000)
+
+				setTimeout(function(){
+					$('.zidanzuo').stop(true).animate({right:0}, 0)//子弹
+				$('.zidanzuo')[0].style.display="none";
+				alert('游戏结束啦');
+
+				},3000)
+				//$('.spi img')[0].style.transform="rotate(0deg)";	
+			}//判断是否开枪
+			// if(dan3>720){
+			// 	$('.zidanzuo').stop(true).animate({right:500}, 500)//子弹
+			// 	$('.zidanzuo')[0].style.display="block";
+			// 	//$('.spi img')[0].style.transform="rotate(0deg)";	
+			// }//判断
+				
+				//console.log((4*360*clickd+danindex));
+				//点击获取变型
+				//$('.danjia')[0].style.backgroundPosition="98px 0px";
+				$('.danjia')[0].style.backgroundPosition=dan+"px 0px";
+				//console.log("'+dan+'px 0px");
+				$('.pin img')[0].style.transform="rotate(60deg)";//'"rotate('+dushu+'deg)"'
+				setTimeout(function(){
+					$('.pin img')[0].style.transform="rotate(0deg)";
+				},400);
+				$('.tig img')[0].style.transform="rotate(-40deg)";
+				setTimeout(function(){
+					$('.tig img')[0].style.transform="rotate(0deg)";
+				},400)
+			})
+		})
+	</script>
+</head>
+<body>
+	<div class="gun">
+		<div>
+		<img src="gun.png">
+		<img src="flybullet.png" class="zidanzuo">
+		</div>
+		<div class="danjia">	
+		</div>
+		<div class="pin">
+			<img src="pin.png">	
+		</div>
+		<div class="tig">
+			<img src="trigger.png">	
+		</div>
+		<div class="start">
+			<input type="submit" name="" value="开始!" class="kaishi" >
+			<hr>
+			<input type="submit" name="" value="开始!" class="zkaishi" >
+		</div>
+		<div class="spi">
+			<img src="spin3.png">
+		</div>
+		<div class="lunbo1">
+			<div class="shikou1">
+				<ul>
+					<li><img src="cc122mg.jpg"></li>
+					<li><img src="cc322223g.jpg"></li>
+					<li><img src="cc2.jpg"></li>
+					<li><img src="cc4wwg.jpg"></li>
+					<li><img src="cc5wmg.jpg"></li>
+					<li><img src="cc122mg.jpg"></li>
+				</ul>
+			</div>
+				<div class="shikou11">
+					<ol>
+						<li><img src="搜狗截图cxy307203858_01.jpg"></li>
+						<li><img src="搜狗截图cxy307203858_02.gif"></li>
+						<li><img src="搜狗截图cxy307203858_03.gif"></li>
+						<li><img src="搜狗截图cxy307203858_04.gif"></li>
+						<li><img src="搜狗截图cxy307203858_05.gif"></li>
+						<li><img src="搜狗截图cxy307203858_01.jpg"></li>
+					</ol>
+				</div>
+		</div>
+		<div class="blood">
+			<img src="blood_cn.png">
+		</div>
+	</div>
+	<div>
+		<audio id="audiozuo1">
+			<source src="spin.wav" id="d1"></source>
+	  </audio>
+	  <audio id="audiozuo2">
+			<source src="gununcock.wav" id="d2"></source>		
+	  </audio>
+	 	<audio id="audiozuo3">
+			<source src="EnfieldNo2MkIFire.wav" id="d3"></source>
+	  </audio>
+	</div>
+</body>
+</html>
